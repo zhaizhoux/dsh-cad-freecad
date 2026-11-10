@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FreeCAD 参数化工作台 · dsh-cad-freecad</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">FC</span>
+      <div>
+        <h1>FreeCAD 参数化工作台</h1>
+        <p class="subtitle">dsh-cad-freecad · 声明式建模 / 精确几何校验 / 只读预览</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span id="backend-status" class="badge">检测中…</span>
+      <button id="theme-toggle" type="button">切换主题</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="panel">
+        <h2>示例文档</h2>
+        <div class="row">
+          <select id="example-select" aria-label="示例文档"></select>
+          <button id="btn-load-example" type="button">载入</button>
+        </div>
+      </section>
+
+      <section class="panel grow">
+        <h2>建模文档 <span class="hint">JSON · DSL</span></h2>
+        <textarea id="document-input" spellcheck="false" aria-label="建模文档 JSON"></textarea>
+        <div class="row wrap">
+          <button id="btn-validate" type="button" class="ghost">校验</button>
+          <button id="btn-build" type="button" class="primary">构建模型</button>
+          <button id="btn-format" type="button" class="ghost">格式化</button>
+        </div>
+        <p id="validate-result" class="hint"></p>
+      </section>
+
+      <section class="panel">
+        <h2>当前文档</h2>
+        <label for="current-id">ID</label>
+        <input id="current-id" type="text" readonly>
+        <label for="revision-label">修订</label>
+        <input id="revision-label" type="text" readonly>
+        <label for="param-input">参数覆盖（JSON）</label>
+        <textarea id="param-input" spellcheck="false" rows="3">{}</textarea>
+        <button id="btn-param" type="button" class="ghost">应用参数（新修订）</button>
+      </section>
+
+      <section class="panel">
+        <h2>已存文档 <button id="btn-refresh" type="button" class="tiny">刷新</button></h2>
+        <ul id="doc-list" class="doc-list"></ul>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="tabs" role="tablist">
+        <button data-tab="preview" class="tab active" type="button">四视图预览</button>
+        <button data-tab="report" class="tab" type="button">几何报告</button>
+        <button data-tab="raw" class="tab" type="button">原始结果</button>
+      </div>
+
+      <div id="tab-preview" class="tab-panel">
+        <div id="preview-box" class="preview-box">
+          <p id="preview-empty">构建模型后，这里显示 front / top / right / iso 四视图。</p>
+        </div>
+      </div>
+      <div id="tab-report" class="tab-panel hidden">
+        <div id="report-box"></div>
+      </div>
+      <div id="tab-raw" class="tab-panel hidden">
+        <pre id="raw-box"></pre>
+      </div>
+
+      <div class="export-bar">
+        <label for="export-format">导出格式</label>
+        <select id="export-format">
+          <option value="step">STEP</option>
+          <option value="stl">STL</option>
+          <option value="iges">IGES</option>
+          <option value="brep">BREP</option>
+          <option value="svg">SVG</option>
+          <option value="dxf">DXF</option>
+          <option value="json">JSON 报告</option>
+        </select>
+        <button id="btn-export" type="button">导出并下载</button>
+        <span id="export-status" class="hint"></span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="statusbar">
+    <span id="footer-status">就绪</span>
+    <span id="footer-schema"></span>
+  </footer>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

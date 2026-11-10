@@ -1,0 +1,19 @@
+{
+  "schema": "dsh.cad.freecad/document@1",
+  "name": "六角螺母毛坯",
+  "units": "mm",
+  "parameters": {
+    "height": 10,
+    "bore": 12
+  },
+  "features": [
+    {
+      "op": "polygon_extrude",
+      "id": "hex",
+      "points": [[12, 0], [6, 10.3923], [-6, 10.3923], [-12, 0], [-6, -10.3923], [6, -10.3923]],
+      "height": "$height"
+    },
+    { "op": "hole", "id": "bored", "on": "hex", "diameter": "$bore", "at": [0, 0, 0], "depth": "$height" }
+  ],
+  "result": "bored"
+}

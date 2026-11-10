@@ -1,0 +1,30 @@
+{
+  "schema": "dsh.cad.freecad/document@1",
+  "name": "法兰盘",
+  "units": "mm",
+  "parameters": {
+    "outer_r": 45,
+    "thickness": 10,
+    "bolt_d": 10,
+    "pitch": 60
+  },
+  "features": [
+    { "op": "cylinder", "id": "disc", "radius": "$outer_r", "height": "$thickness" },
+    { "op": "hole", "id": "center", "on": "disc", "diameter": 20, "at": [0, 0, 0], "depth": "$thickness" },
+    {
+      "op": "hole_pattern",
+      "id": "bolts",
+      "on": "center",
+      "diameter": "$bolt_d",
+      "depth": "$thickness",
+      "grid": {
+        "origin": [-30, -30, 0],
+        "step_x": "$pitch",
+        "step_y": "$pitch",
+        "count_x": 2,
+        "count_y": 2
+      }
+    }
+  ],
+  "result": "bolts"
+}

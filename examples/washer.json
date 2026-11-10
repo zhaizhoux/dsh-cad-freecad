@@ -1,0 +1,16 @@
+{
+  "schema": "dsh.cad.freecad/document@1",
+  "name": "参数化垫圈",
+  "units": "mm",
+  "parameters": {
+    "outer": 30,
+    "inner": 14,
+    "t": 4
+  },
+  "features": [
+    { "op": "cylinder", "id": "outer", "radius": "$outer", "height": "$t" },
+    { "op": "cylinder", "id": "bore", "radius": "$inner", "height": "$t" },
+    { "op": "boolean", "id": "washer", "mode": "cut", "parts": ["outer", "bore"] }
+  ],
+  "result": "washer"
+}

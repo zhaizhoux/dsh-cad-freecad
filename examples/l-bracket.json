@@ -1,0 +1,19 @@
+{
+  "schema": "dsh.cad.freecad/document@1",
+  "name": "L 型支架",
+  "units": "mm",
+  "parameters": {
+    "width": 100,
+    "height": 70,
+    "thickness": 8,
+    "hole_d": 9
+  },
+  "features": [
+    { "op": "box", "id": "plate", "length": "$width", "width": "$thickness", "height": "$height" },
+    { "op": "box", "id": "leg", "length": "$thickness", "width": "$width", "height": "$height" },
+    { "op": "boolean", "id": "body", "mode": "union", "parts": ["plate", "leg"] },
+    { "op": "hole", "id": "hole_y", "on": "body", "diameter": "$hole_d", "at": [25, 4, 20], "axis": "y", "depth": "$thickness" },
+    { "op": "hole", "id": "hole_x", "on": "hole_y", "diameter": "$hole_d", "at": [4, 25, 20], "axis": "x", "depth": "$thickness" }
+  ],
+  "result": "hole_x"
+}

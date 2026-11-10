@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: ["22", "24"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      # The whole suite is kernel-independent: FreeCAD calls are replaced by a
+      # simulated runner. Real-kernel tests are gated on DSH_CAD_FREECAD_CMD.
+      - name: Run unit tests
+        run: npm test
+
+      - name: Parse-check entry points
+        run: npm run check
+
+      - name: CLI smoke test (version, help, schema)
+        run: |
+          node bin/cli.mjs --version
+          node bin/cli.mjs help
+          node bin/cli.mjs schema
+
+      - name: Validate bundled examples without a kernel
+        run: |
+          node bin/cli.mjs validate examples/washer.json
+          node bin/cli.mjs validate examples/flange.json
+          node bin/cli.mjs validate examples/hex-nut.json
+          node bin/cli.mjs validate examples/l-bracket.json
+          node bin/cli.mjs validate examples/step-block.json
+
+      - name: doctor degrades gracefully when FreeCAD is absent
+        run: node bin/cli.mjs doctor --json
+
+      - name: A malformed document must fail the CLI
+        shell: bash
+        run: |
+          printf '{not json' > bad.json
+          if node bin/cli.mjs validate bad.json; then
+            echo "validate unexpectedly succeeded on malformed JSON" >&2
+            exit 1
+          fi

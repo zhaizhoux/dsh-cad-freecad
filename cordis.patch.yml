@@ -1,0 +1,17 @@
+# DSH bundle patch. `dsh plugin --profile <profile> add dsh-cad-freecad`
+# appends this package to the profile's dsh.profile.bundles and the loader
+# composes this row. `config` is passed verbatim to apply(ctx, config).
+# A patch that targets this row by id replaces the WHOLE config object.
+- insert:
+    - id: dsh-cad-freecad
+      name: dsh-cad-freecad
+      config:
+        workDir: ''
+        freecadCmd: ''
+        timeoutSeconds: 120
+        maxFeatures: 200
+        maxBoundingBoxMm: 2000
+        maxArtifactBytes: 134217728
+        allowExport: true
+        allowModelWrite: true
+        enableSkill: true

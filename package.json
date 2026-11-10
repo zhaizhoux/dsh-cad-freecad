@@ -1,0 +1,68 @@
+{
+  "name": "dsh-cad-freecad",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness plugin that turns a local FreeCAD installation into a safe, declarative CAD modeling backend: parametric solids, exact geometry reports, STEP/IGES/STL/BREP/SVG/DXF export, a standalone CLI and a local browser UI.",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./core": "./src/registry.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "dsh-cad-freecad": "./bin/cli.mjs"
+  },
+  "files": [
+    "lib/",
+    "src/",
+    "python/",
+    "bin/",
+    "server/",
+    "web/",
+    "cordis.patch.yml",
+    "locale/",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dsh": {
+    "plugin": true,
+    "kind": "server",
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check lib/index.js && node --check bin/cli.mjs && node --check server/serve.mjs",
+    "cli": "node bin/cli.mjs",
+    "serve": "node bin/cli.mjs serve"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "cad",
+    "freecad",
+    "occt",
+    "step",
+    "parametric-modeling",
+    "readonly",
+    "declarative"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.0.1-rc.1 <1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
+  }
+}

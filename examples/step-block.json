@@ -1,0 +1,17 @@
+{
+  "schema": "dsh.cad.freecad/document@1",
+  "name": "阶梯块",
+  "units": "mm",
+  "parameters": {
+    "w": 60,
+    "d": 40,
+    "h": 30,
+    "notch": 20
+  },
+  "features": [
+    { "op": "box", "id": "base", "length": "$w", "width": "$d", "height": "$h" },
+    { "op": "box", "id": "cut", "length": "$notch", "width": "$d", "height": "$h", "at": [40, 0, 15] },
+    { "op": "boolean", "id": "stepped", "mode": "cut", "parts": ["base", "cut"] }
+  ],
+  "result": "stepped"
+}

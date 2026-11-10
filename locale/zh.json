@@ -1,0 +1,8 @@
+{
+  "plugin.name": "FreeCAD 参数化建模工作台",
+  "plugin.description": "用本机 FreeCAD 内核做声明式参数化建模：精确几何校验与 STEP/IGES/STL/BREP/SVG/DXF 导出。",
+  "tool.doctor": "检查本机 FreeCAD 后端",
+  "tool.build": "构建参数化模型",
+  "tool.preview": "生成四视图 SVG 图纸",
+  "tool.export": "导出模型"
+}

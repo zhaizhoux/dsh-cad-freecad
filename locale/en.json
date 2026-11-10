@@ -1,0 +1,8 @@
+{
+  "plugin.name": "FreeCAD CAD Workbench",
+  "plugin.description": "Declarative parametric CAD modeling with a local FreeCAD kernel: exact geometry checks and STEP/IGES/STL/BREP/SVG/DXF export.",
+  "tool.doctor": "Check the local FreeCAD backend",
+  "tool.build": "Build a parametric model",
+  "tool.preview": "Render a four-view SVG drawing",
+  "tool.export": "Export the model"
+}
